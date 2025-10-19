@@ -1,0 +1,7 @@
+body { background: #0d0d0d; color: white; font-family: Arial, sans-serif; }
+header { padding: 20px; text-align: center; background: #111; }
+.upload, .auth { margin: 20px auto; max-width: 480px; display: flex; flex-direction: column; gap:10px; }
+.tracklist ul { list-style: none; padding:0; }
+.tracklist li { padding: 10px; border-bottom: 1px solid #222; cursor: pointer; }
+.player { margin: 20px; }
+input[type=file] { color: white; }
