@@ -1,36 +1,153 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+/* ============================
+🚚 YouTube Routier 87 - Style principal
+Auteur : YouTube Routier 87
+============================ */
+
+/* --- RESET GLOBAL --- */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #111;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- HEADER --- */
 header {
   background-color: #ff0000;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
+header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+header h1::before {
+  content: "▶️";
+  font-size: 1.2rem;
+}
+
+/* --- BOUTONS AUTH --- */
+#auth button {
+  background-color: white;
+  color: #ff0000;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+#auth button:hover {
+  background-color: #ffecec;
+  transform: scale(1.05);
+}
+
+/* --- CONTENU PRINCIPAL --- */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* --- VIDÉO PRINCIPALE --- */
 .video {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
+.video iframe {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* --- LISTE DE VIDÉOS --- */
 .videos-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
   padding: 1rem;
 }
 
 .video-card {
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.video-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  color: #222;
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+}
+
+/* --- MODE SOMBRE --- */
+body.dark-mode {
+  background-color: #111;
+  color: #f9f9f9;
+}
+
+body.dark-mode header {
+  background-color: #222;
+}
+
+body.dark-mode #auth button {
+  background-color: #444;
+  color: white;
+}
+
+body.dark-mode .video-card {
+  background-color: #222;
+  color: white;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .video iframe {
+    height: 300px;
+  }
+
+  .videos-list {
+    grid-template-columns: 1fr;
+  }
 }
