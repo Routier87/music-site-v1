@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="background"></div>
+
   <header>
     <h1>YouTube Routier87</h1>
+
     <div id="auth">
       <button id="loginBtn">Se connecter</button>
       <button id="logoutBtn" style="display:none;">Se déconnecter</button>
@@ -16,24 +19,43 @@
   </header>
 
   <main>
-    <section class="video">
+    <!-- 🧍 Message d'accueil -->
+    <section id="welcomeSection" style="text-align:center; margin-top: 20px;"></section>
+
+    <!-- 🎥 Vidéo principale -->
+    <section class="video" style="text-align:center;">
       <iframe 
         width="560" 
         height="315" 
         src="https://www.youtube.com/embed/t2wAE-yAA3I"
-        title="Vidéo YouTube"
+        title="Vidéo YouTube Routier87"
         frameborder="0"
         allowfullscreen>
       </iframe>
     </section>
 
+    <!-- 📺 Liste des vidéos -->
     <section class="videos-list">
       <h2>Vidéos recommandées</h2>
       <p style="text-align:center;">Connecte-toi pour voir les vidéos 🚛</p>
     </section>
   </main>
 
-  <!-- 🔗 On charge ton script de gestion -->
   <script src="script.js"></script>
+
+  <!-- 💬 Message de bienvenue dynamique -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedUser = localStorage.getItem("utilisateur");
+      const welcomeSection = document.getElementById("welcomeSection");
+
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        welcomeSection.innerHTML = `<h2>👋 Bonjour ${user.nom} ! Ravi de te revoir sur YouTube Routier87 🚛</h2>`;
+      } else {
+        welcomeSection.innerHTML = `<h2>Bienvenue sur YouTube Routier87 👋</h2><p>Connecte-toi pour profiter des vidéos exclusives !</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
