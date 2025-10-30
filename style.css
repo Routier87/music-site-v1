@@ -76,3 +76,20 @@ main { padding: 2rem; text-align: center; }
 body.dark { background:#111; color:#f9f9f9; }
 body.dark .road-background { filter: brightness(0.3); }
 body.dark header { background: rgba(30,30,30,0.9); }
+
+/* Popup connexion */
+.popup-login {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.7);
+  display:flex; justify-content:center; align-items:center;
+  z-index:1000;
+}
+.popup-content {
+  background:#fff; padding:2rem; border-radius:10px; text-align:center; min-width:300px;
+}
+.popup-content input {
+  display:block; width:90%; margin:0.5rem auto; padding:0.5rem;
+}
+.popup-buttons { margin-top:1rem; }
+.popup-buttons button { margin:0 0.5rem; }
