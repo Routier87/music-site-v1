@@ -25,7 +25,7 @@
 
     <!-- Barre de recherche -->
     <section class="search-section" style="text-align:center; margin:1rem 0;">
-      <input type="text" id="searchInput" placeholder="Rechercher un titre..." 
+      <input type="text" id="searchInput" placeholder="Rechercher un titre..."
              style="padding:0.5rem; width:60%; max-width:400px; border-radius:5px; border:none;">
     </section>
 
@@ -37,7 +37,18 @@
       </iframe>
     </section>
 
-    <!-- Liste des vidéos -->
+    <!-- Musique exclusive -->
+    <section class="music-exclusive" style="text-align:center; margin-top:2rem;">
+      <h2>🎵 Musique Exclusive</h2>
+      <iframe width="560" height="315"
+              src="https://www.youtube.com/embed/lIxlL6mr2Ho"
+              title="Musique Exclusive"
+              frameborder="0"
+              allowfullscreen>
+      </iframe>
+    </section>
+
+    <!-- Liste des vidéos recommandées -->
     <section class="videos-list">
       <h2>Vidéos recommandées</h2>
       <p style="text-align:center;">Connecte-toi pour voir les vidéos 🚛</p>
@@ -47,7 +58,6 @@
   <script src="script.js"></script>
 
   <script>
-    // Message de bienvenue dynamique
     document.addEventListener("DOMContentLoaded", () => {
       const savedUser = localStorage.getItem("utilisateur");
       const welcomeSection = document.getElementById("welcomeSection");
