@@ -1,5 +1,5 @@
 /* ===============================
-   🌄 Style global et fond d'écran
+   🌄 Fond routier et Porsche animée
 ================================= */
 body {
   font-family: Arial, sans-serif;
@@ -11,30 +11,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Fond routier + Porsche */
-.background {
+/* Route et Porsche */
+.road-background {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 200px;
+  background: linear-gradient(to top, #111, #222);
   z-index: -1;
   overflow: hidden;
-  background: linear-gradient(to bottom, #111, #222);
 }
 .porsche {
   position: absolute;
-  bottom: 20px;
-  width: 200px;
+  bottom: 10px;
+  width: 150px;
   animation: rouler 5s linear infinite;
 }
-
-/* Animation Porsche */
 @keyframes rouler {
-  0%   { left: -250px; }
-  50%  { left: calc(100% + 50px); }
-  51%  { left: -250px; }
-  100% { left: calc(100% + 50px); }
+  0% { left: -200px; }
+  100% { left: 100%; }
 }
 
 /* En-tête */
@@ -132,5 +128,5 @@ main { padding: 2rem; text-align: center; }
 
 /* Mode sombre */
 body.dark { background: #111; color: #f9f9f9; }
-body.dark .background { filter: brightness(0.3); }
+body.dark .road-background { filter: brightness(0.3); }
 body.dark header { background: rgba(30,30,30,0.9); }
