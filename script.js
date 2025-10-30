@@ -6,11 +6,12 @@ const authDiv = document.getElementById("auth");
 const searchInput = document.getElementById("searchInput");
 
 const comptes = {
-  "route87": "r87Pass!23",
+  "routie87": "r87Pass!23",
   "Oxi": "Oxi_2025",
-  "Filou": "Filou#99",
+  "Filou": "Filou@08",
   "Kyù": "Kyu-1love",
   "SuperCAT71": "SC71-power!"
+  "Farm": "Patron01"
 };
 
 let utilisateur = null;
