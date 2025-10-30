@@ -1,17 +1,22 @@
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const videosList = document.querySelector(".videos-list");
-const authDiv = document.getElementById("auth");
 const searchInput = document.getElementById("searchInput");
 
-// Comptes utilisateurs
+// Comptes utilisateurs initiaux
 const comptes = {
-  "route87": "r87Pass!23",
-  "Oxi": "Oxi_2025",
-  "Filou": "Filou#99",
-  "Kyù": "Kyu-1love",
-  "SuperCAT71": "SC71-power!"
+  "route87": "12345",
+  "Oxi": "OxiPass1!",
+  "Filou": "FilouPass2!",
+  "Kyù": "KyuPass3!",
+  "SuperCAT71": "SC71Pass4!"
 };
+
+// Tableau de musiques exclusives
+const musiquesExclusives = [
+  { titre: "Exclu 1", lien: "https://www.youtube.com/embed/lIxlL6mr2Ho" },
+  { titre: "Exclu 2", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+];
 
 let utilisateur = null;
 
@@ -23,12 +28,13 @@ window.addEventListener("DOMContentLoaded", () => {
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
     afficherVideos(utilisateur.nom);
+    afficherMusiques();
   } else {
     effacerVideos();
   }
 });
 
-// Connexion popup
+// Popup connexion
 loginBtn.addEventListener("click", () => {
   if (utilisateur) return;
   const popup = document.createElement("div");
@@ -53,12 +59,14 @@ loginBtn.addEventListener("click", () => {
     if (comptes[username] && comptes[username] === password) {
       utilisateur = { nom: username };
       localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-      showMessage(`Bienvenue ${username} 🚛`, "success");
       popup.remove();
       loginBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
       afficherVideos(username);
-    } else showMessage("Identifiant ou mot de passe incorrect ❌", "error");
+      afficherMusiques();
+    } else {
+      alert("Identifiant ou mot de passe incorrect ❌");
+    }
   });
 });
 
@@ -66,42 +74,65 @@ loginBtn.addEventListener("click", () => {
 logoutBtn.addEventListener("click", () => {
   utilisateur = null;
   localStorage.removeItem("utilisateur");
-  showMessage("Tu es déconnecté 👋", "info");
   loginBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
   effacerVideos();
-});
-
-// Recherche dynamique
-searchInput.addEventListener("input", () => {
-  if (!utilisateur) return;
-  const query = searchInput.value.toLowerCase();
-  afficherVideos(utilisateur.nom, query);
+  document.querySelector(".music-exclusive").innerHTML = "<h2>🎵 Musiques Exclusives</h2>";
 });
 
 // Affichage vidéos
 function afficherVideos(username, filter = "") {
-  const baseVideos = [
+  const videos = [
     { titre: "Sur la route - vlog #1", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     { titre: "Ma journée de chauffeur poids lourd", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" },
-    { titre: "Conseils pour les longs trajets", lien: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
+    { titre: "Conseils pour les longs trajets", lien: "https://www.youtube.com/embed/3JZ_D3ELwOQ" }
   ];
 
-  const personnalisations = {
-    "Filou": [{ titre: "Filou : astuces camions", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
-    "Oxi": [{ titre: "Oxi : routes de nuit", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" }],
-    "Kyù": [{ titre: "Kyù : optimisation trajets", lien: "https://www.youtube.com/embed/3JZ_D3ELwOQ" }],
-    "SuperCAT71": [{ titre: "SuperCAT71 : mécanique rapide", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }],
-    "route87": baseVideos
-  };
-
-  let videos = personnalisations[username] || baseVideos;
-  if (filter.trim() !== "") videos = videos.filter(v => v.titre.toLowerCase().includes(filter));
-
   videosList.innerHTML = "<h2>Vidéos recommandées</h2>";
-  if (videos.length === 0) videosList.innerHTML += "<p style='text-align:center;'>Aucune vidéo trouvée 😕</p>";
-
   videos.forEach(video => {
-    const card = document.createElement("div");
-    card.className = "video-card";
-    card.innerHTML = `<h3>${
+    if (!filter || video.titre.toLowerCase().includes(filter.toLowerCase())) {
+      const card = document.createElement("div");
+      card.className = "video-card";
+      card.innerHTML = `<h3>${video.titre}</h3>
+                        <iframe width="300" height="169" src="${video.lien}" frameborder="0" allowfullscreen></iframe>`;
+      videosList.appendChild(card);
+    }
+  });
+}
+
+// Effacer vidéos
+function effacerVideos() {
+  videosList.innerHTML = "<h2>Vidéos recommandées</h2><p style='text-align:center;'>Connecte-toi pour voir les vidéos 🚛</p>";
+}
+
+// Affichage musiques exclusives
+function afficherMusiques() {
+  const section = document.querySelector(".music-exclusive");
+  section.innerHTML = "<h2>🎵 Musiques Exclusives</h2>";
+  musiquesExclusives.forEach(musique => {
+    const div = document.createElement("div");
+    div.style.margin = "1rem 0";
+    div.innerHTML = `<h3>${musique.titre}</h3>
+                     <iframe width="560" height="315" src="${musique.lien}" frameborder="0" allowfullscreen></iframe>`;
+    section.appendChild(div);
+  });
+}
+
+// Recherche dynamique
+searchInput.addEventListener("input", () => {
+  if (!utilisateur) return;
+  afficherVideos(utilisateur.nom, searchInput.value);
+});
+
+// Mode sombre
+const darkModeBtn = document.createElement("button");
+darkModeBtn.textContent = "🌙 Mode sombre";
+darkModeBtn.style.marginLeft = "1rem";
+document.getElementById("auth").appendChild(darkModeBtn);
+
+let dark = false;
+darkModeBtn.addEventListener("click", () => {
+  dark = !dark;
+  document.body.classList.toggle("dark", dark);
+  darkModeBtn.textContent = dark ? "☀️ Mode clair" : "🌙 Mode sombre";
+});
