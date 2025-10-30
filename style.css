@@ -1,6 +1,4 @@
-/* ===============================
-   🌄 Fond routier et Porsche animée
-================================= */
+/* Corps principal */
 body {
   font-family: Arial, sans-serif;
   color: #fff;
@@ -11,7 +9,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Route et Porsche */
+/* Fond route et Porsche animée */
 .road-background {
   position: fixed;
   bottom: 0;
@@ -35,14 +33,14 @@ body {
 
 /* En-tête */
 header {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0,0,0,0.7);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(5px);
 }
-h1 { margin:0; color: #ff3333; }
+h1 { margin:0; color:#ff3333; }
 
 /* Boutons */
 button {
@@ -90,24 +88,24 @@ main { padding: 2rem; text-align: center; }
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index:1000;
 }
 .popup-content {
-  background: #111;
-  color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  border: 2px solid #ff3333;
+  background:#111;
+  color:#fff;
+  padding:2rem;
+  border-radius:10px;
+  width:300px;
+  text-align:center;
+  border:2px solid #ff3333;
 }
 .popup-content input {
-  display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.6rem;
-  border: none;
-  border-radius: 5px;
+  display:block;
+  width:100%;
+  margin:0.5rem 0;
+  padding:0.6rem;
+  border:none;
+  border-radius:5px;
 }
 .popup-buttons { display:flex; justify-content: space-around; margin-top:1rem; }
 
@@ -127,6 +125,6 @@ main { padding: 2rem; text-align: center; }
 .msg.info { background:#3498db; }
 
 /* Mode sombre */
-body.dark { background: #111; color: #f9f9f9; }
+body.dark { background:#111; color:#f9f9f9; }
 body.dark .road-background { filter: brightness(0.3); }
 body.dark header { background: rgba(30,30,30,0.9); }
