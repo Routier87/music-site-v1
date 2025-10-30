@@ -36,6 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
   if (savedUser) {
     utilisateur = JSON.parse(savedUser);
     loginBtn.style.display = "none";
+    signupBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
     afficherVideos();
     afficherMusiques();
@@ -45,72 +46,66 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Connexion popup
 loginBtn.addEventListener("click", () => {
-  const popup = document.createElement("div");
-  popup.className = "popup-login";
-  popup.innerHTML = `
-    <div class="popup-content">
-      <h2>Connexion</h2>
-      <input type="text" id="username" placeholder="Identifiant">
-      <input type="password" id="password" placeholder="Mot de passe">
-      <div class="popup-buttons">
-        <button id="validerLogin">Connexion</button>
-        <button id="fermerPopup">Annuler</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(popup);
-  document.getElementById("fermerPopup").addEventListener("click", () => popup.remove());
-
-  document.getElementById("validerLogin").addEventListener("click", () => {
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
+  showPopup("Connexion", "username", "password", (username, password) => {
     if (comptes[username] && comptes[username] === password) {
       utilisateur = { nom: username };
       localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-      popup.remove();
       loginBtn.style.display = "none";
+      signupBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
       afficherVideos();
       afficherMusiques();
       afficherMesMusiques();
-    } else alert("Identifiant ou mot de passe incorrect ❌");
+      return true;
+    } else {
+      alert("Identifiant ou mot de passe incorrect ❌");
+      return false;
+    }
   });
 });
 
 // Inscription popup
 signupBtn.addEventListener("click", () => {
+  showPopup("Créer un compte", "newUsername", "newPassword", (username, password) => {
+    if (!username || !password) return alert("Remplis tous les champs !");
+    if (comptes[username]) return alert("Identifiant déjà utilisé !");
+    comptes[username] = password;
+    alert("Compte créé ✅ Tu peux maintenant te connecter.");
+    return true;
+  });
+});
+
+// Fonction popup générique
+function showPopup(title, input1Id, input2Id, callback) {
   const popup = document.createElement("div");
   popup.className = "popup-login";
   popup.innerHTML = `
     <div class="popup-content">
-      <h2>Créer un compte</h2>
-      <input type="text" id="newUsername" placeholder="Identifiant">
-      <input type="password" id="newPassword" placeholder="Mot de passe">
+      <h2>${title}</h2>
+      <input type="text" id="${input1Id}" placeholder="Identifiant">
+      <input type="password" id="${input2Id}" placeholder="Mot de passe">
       <div class="popup-buttons">
-        <button id="validerSignup">Créer</button>
+        <button id="validerPopup">Valider</button>
         <button id="fermerPopup">Annuler</button>
       </div>
     </div>
   `;
   document.body.appendChild(popup);
-  document.getElementById("fermerPopup").addEventListener("click", () => popup.remove());
 
-  document.getElementById("validerSignup").addEventListener("click", () => {
-    const username = document.getElementById("newUsername").value.trim();
-    const password = document.getElementById("newPassword").value.trim();
-    if (!username || !password) return alert("Remplis tous les champs !");
-    if (comptes[username]) return alert("Identifiant déjà utilisé !");
-    comptes[username] = password;
-    alert("Compte créé ✅ Tu peux maintenant te connecter.");
-    popup.remove();
+  document.getElementById("fermerPopup").addEventListener("click", () => popup.remove());
+  document.getElementById("validerPopup").addEventListener("click", () => {
+    const val1 = document.getElementById(input1Id).value.trim();
+    const val2 = document.getElementById(input2Id).value.trim();
+    if (callback(val1, val2)) popup.remove();
   });
-});
+}
 
 // Déconnexion
 logoutBtn.addEventListener("click", () => {
   utilisateur = null;
   localStorage.removeItem("utilisateur");
   loginBtn.style.display = "inline-block";
+  signupBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
   effacerVideos();
   document.querySelector(".music-exclusive").innerHTML = "<h2>🎵 Musiques Exclusives</h2>";
@@ -118,14 +113,12 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Mode sombre
-let dark = false;
 darkModeBtn.addEventListener("click", () => {
-  dark = !dark;
-  document.body.classList.toggle("dark", dark);
-  darkModeBtn.textContent = dark ? "☀️ Mode clair" : "🌙 Mode sombre";
+  document.body.classList.toggle("dark");
+  darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
 });
 
-// Fonctions
+// Fonctions d’affichage
 function afficherVideos() {
   const videos = [
     { titre: "Sur la route - vlog #1", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
