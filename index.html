@@ -37,15 +37,9 @@
       </iframe>
     </section>
 
-    <!-- Musique exclusive -->
+    <!-- Musiques exclusives -->
     <section class="music-exclusive" style="text-align:center; margin-top:2rem;">
-      <h2>🎵 Musique Exclusive</h2>
-      <iframe width="560" height="315"
-              src="https://www.youtube.com/embed/lIxlL6mr2Ho"
-              title="Musique Exclusive"
-              frameborder="0"
-              allowfullscreen>
-      </iframe>
+      <h2>🎵 Musiques Exclusives</h2>
     </section>
 
     <!-- Liste des vidéos recommandées -->
@@ -56,19 +50,5 @@
   </main>
 
   <script src="script.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const savedUser = localStorage.getItem("utilisateur");
-      const welcomeSection = document.getElementById("welcomeSection");
-      if (savedUser) {
-        const user = JSON.parse(savedUser);
-        welcomeSection.innerHTML = `<h2>👋 Bonjour ${user.nom} ! Ravi de te revoir sur YouTube Routier87 🚛</h2>`;
-      } else {
-        welcomeSection.innerHTML = `<h2>Bienvenue sur YouTube Routier87 👋</h2>
-                                    <p>Connecte-toi pour profiter des vidéos exclusives !</p>`;
-      }
-    });
-  </script>
 </body>
 </html>
