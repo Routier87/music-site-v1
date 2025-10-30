@@ -1,153 +1,163 @@
-/* ============================
-🚚 YouTube Routier 87 - Style principal
-Auteur : YouTube Routier 87
-============================ */
-
-/* --- RESET GLOBAL --- */
-* {
+/* ===============================
+   🌄 Style global et fond d'écran
+================================= */
+body {
+  font-family: Arial, sans-serif;
+  color: #fff;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #111;
-  transition: background-color 0.3s, color 0.3s;
+/* 🌆 Fond d'écran routier */
+.background {
+  background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80');
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: brightness(0.6);
 }
 
-/* --- HEADER --- */
+/* ===============================
+   🧱 En-tête
+================================= */
 header {
-  background-color: #ff0000;
-  color: white;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  backdrop-filter: blur(5px);
 }
 
-header h1 {
-  font-size: 1.8rem;
-  letter-spacing: 1px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+h1 {
+  margin: 0;
+  color: #ff3333;
 }
 
-header h1::before {
-  content: "▶️";
-  font-size: 1.2rem;
-}
-
-/* --- BOUTONS AUTH --- */
-#auth button {
-  background-color: white;
-  color: #ff0000;
+/* ===============================
+   🎛️ Boutons
+================================= */
+button {
+  background: #ff0000;
   border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
+  transition: 0.2s;
 }
-
-#auth button:hover {
-  background-color: #ffecec;
+button:hover {
+  background: #cc0000;
   transform: scale(1.05);
 }
 
-/* --- CONTENU PRINCIPAL --- */
+/* ===============================
+   🎥 Contenu principal
+================================= */
 main {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-/* --- VIDÉO PRINCIPALE --- */
-.video {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
+  padding: 2rem;
+  text-align: center;
 }
 
 .video iframe {
-  width: 100%;
-  max-width: 900px;
-  height: 500px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-/* --- LISTE DE VIDÉOS --- */
-.videos-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
-}
-
-.video-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-}
-
-.video-card h3 {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-  color: #222;
-}
-
-.video-card iframe {
-  width: 100%;
-  height: 160px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
-/* --- MODE SOMBRE --- */
-body.dark-mode {
-  background-color: #111;
+/* ===============================
+   🎬 Vidéos recommandées
+================================= */
+.videos-list {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.video-card {
+  display: inline-block;
+  margin: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: 0.2s;
+}
+.video-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* ===============================
+   💬 Popup connexion
+================================= */
+.popup-login {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.popup-content {
+  background: #111;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  border: 2px solid #ff3333;
+}
+.popup-content input {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 5px;
+}
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+/* ===============================
+   🔔 Messages (alertes)
+================================= */
+.msg {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: .8rem 1.2rem;
+  border-radius: 6px;
+  color: white;
+  opacity: 0.9;
+  z-index: 2000;
+}
+.msg.success { background: #2ecc71; }
+.msg.error { background: #e74c3c; }
+.msg.info { background: #3498db; }
+
+/* ===============================
+   🌙 Mode sombre
+================================= */
+body.dark {
+  background: #111;
   color: #f9f9f9;
 }
-
-body.dark-mode header {
-  background-color: #222;
+body.dark .background {
+  filter: brightness(0.3);
 }
-
-body.dark-mode #auth button {
-  background-color: #444;
-  color: white;
-}
-
-body.dark-mode .video-card {
-  background-color: #222;
-  color: white;
-}
-
-/* --- RESPONSIVE DESIGN --- */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .video iframe {
-    height: 300px;
-  }
-
-  .videos-list {
-    grid-template-columns: 1fr;
-  }
+body.dark header {
+  background: rgba(30,30,30,0.9);
 }
