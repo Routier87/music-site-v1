@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YouTube Routier87</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Fond routier et Porsche animée -->
+  <!-- Fond avec Porsche animée -->
   <div class="road-background">
     <img src="https://i.imgur.com/3ZpTQ9R.png" alt="Porsche" class="porsche">
   </div>
@@ -21,24 +21,19 @@
   </header>
 
   <main>
-    <!-- Message d'accueil -->
-    <section id="welcomeSection" style="text-align:center; margin-top: 20px;"></section>
+    <section id="welcomeSection" style="text-align:center; margin-top:20px;"></section>
 
     <!-- Barre de recherche -->
-    <section class="search-section" style="text-align:center; margin: 1rem 0;">
-      <input type="text" id="searchInput" placeholder="Rechercher un titre..."
+    <section class="search-section" style="text-align:center; margin:1rem 0;">
+      <input type="text" id="searchInput" placeholder="Rechercher un titre..." 
              style="padding:0.5rem; width:60%; max-width:400px; border-radius:5px; border:none;">
     </section>
 
     <!-- Vidéo principale -->
     <section class="video" style="text-align:center;">
-      <iframe 
-        width="560" 
-        height="315" 
-        src="https://www.youtube.com/embed/t2wAE-yAA3I"
-        title="Vidéo YouTube Routier87"
-        frameborder="0"
-        allowfullscreen>
+      <iframe width="560" height="315" 
+              src="https://www.youtube.com/embed/t2wAE-yAA3I"
+              title="Vidéo YouTube Routier87" frameborder="0" allowfullscreen>
       </iframe>
     </section>
 
@@ -51,17 +46,17 @@
 
   <script src="script.js"></script>
 
-  <!-- Message de bienvenue dynamique -->
   <script>
+    // Message de bienvenue dynamique
     document.addEventListener("DOMContentLoaded", () => {
       const savedUser = localStorage.getItem("utilisateur");
       const welcomeSection = document.getElementById("welcomeSection");
-
       if (savedUser) {
         const user = JSON.parse(savedUser);
         welcomeSection.innerHTML = `<h2>👋 Bonjour ${user.nom} ! Ravi de te revoir sur YouTube Routier87 🚛</h2>`;
       } else {
-        welcomeSection.innerHTML = `<h2>Bienvenue sur YouTube Routier87 👋</h2><p>Connecte-toi pour profiter des vidéos exclusives !</p>`;
+        welcomeSection.innerHTML = `<h2>Bienvenue sur YouTube Routier87 👋</h2>
+                                    <p>Connecte-toi pour profiter des vidéos exclusives !</p>`;
       }
     });
   </script>
