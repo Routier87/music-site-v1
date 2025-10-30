@@ -1,12 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Music Site V3</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Clone</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>YouTube Clone</h1>
+    <div id="auth">
+      <button id="loginBtn">Se connecter</button>
+      <button id="logoutBtn" style="display:none;">Se déconnecter</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="video">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="Vidéo YouTube" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <section class="videos-list">
+      <h2>Vidéos recommandées</h2>
+      <div class="video-card">Vidéo 1</div>
+      <div class="video-card">Vidéo 2</div>
+      <div class="video-card">Vidéo 3</div>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
 </html>
