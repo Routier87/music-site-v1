@@ -1,91 +1,91 @@
 // ================================
-// 🚚 YouTube Routier 87
-// Script principal du site
+// 🚚 YouTube Routier 87 - Connexion locale multi-utilisateurs (mots de passe séparés)
 // ================================
 
-// Import Firebase depuis le CDN (aucune installation nécessaire)
-import { 
-  initializeApp 
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-
-import { 
-  getAuth, 
-  signInWithPopup, 
-  GoogleAuthProvider, 
-  signOut, 
-  onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-// ================================
-// 🔧 Configuration Firebase
-// (à remplacer par ta propre config depuis la console Firebase)
-// ================================
-const firebaseConfig = {
-  apiKey: "TA_CLE_API",
-  authDomain: "TON_PROJET.firebaseapp.com",
-  projectId: "TON_PROJECT_ID",
-  storageBucket: "TON_BUCKET.appspot.com",
-  messagingSenderId: "TON_ID",
-  appId: "TON_APP_ID"
-};
-
-// Initialisation de Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
-// ================================
 // 🎛️ Sélecteurs du DOM
-// ================================
-const loginBtn = document.getElementById('loginBtn');
+const loginForm = document.getElementById('loginForm');
 const logoutBtn = document.getElementById('logoutBtn');
 const videosList = document.querySelector('.videos-list');
 const header = document.querySelector('header');
 
 // ================================
-// 👤 Gestion de l'authentification
+// 👤 Comptes autorisés et mots de passe (temporaire — modifie-les à volonté)
 // ================================
+const comptes = {
+  "route87":   "r87Pass!23",
+  "Oxi":       "Oxi_2025",
+  "Filou":     "Filou#99",
+  "Kyù":       "Kyu-1love",   // si ton éditeur gêne l'accent, remplace par "Kyu-1love"
+  "SuperCAT71":"SC71-power!"
+};
 
-// Connexion avec Google
-loginBtn.addEventListener('click', () => {
-  signInWithPopup(auth, provider)
-    .then(result => {
-      const user = result.user;
-      alert(`Bienvenue ${user.displayName} 🚛`);
-    })
-    .catch(err => console.error('Erreur connexion :', err));
-});
+// Pour debug rapide (optionel) : afficher les comptes dans la console (retire en production)
+console.info("Comptes de test :", Object.keys(comptes));
 
-// Déconnexion
-logoutBtn.addEventListener('click', () => {
-  signOut(auth).then(() => {
-    alert('Tu es déconnecté 👋');
-  });
-});
+// ================================
+// État utilisateur
+// ================================
+let utilisateur = null;
 
-// Mise à jour dynamique selon l'état de connexion
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    loginBtn.style.display = 'none';
+// ================================
+// 🔐 Connexion
+// ================================
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  if (comptes[username] && comptes[username] === password) {
+    utilisateur = { nom: username };
+    showMessage(`Bienvenue ${username} 🚛`, 'success');
+    loginForm.style.display = 'none';
     logoutBtn.style.display = 'inline-block';
-    afficherVideos();
+    afficherVideosForUser(username);
   } else {
-    loginBtn.style.display = 'inline-block';
-    logoutBtn.style.display = 'none';
-    effacerVideos();
+    showMessage('Identifiant ou mot de passe incorrect ❌', 'error');
   }
 });
 
 // ================================
-// 🎬 Gestion des vidéos affichées
+// 🚪 Déconnexion
 // ================================
+logoutBtn.addEventListener('click', () => {
+  utilisateur = null;
+  showMessage('Tu es déconnecté 👋', 'info');
+  loginForm.style.display = 'block';
+  logoutBtn.style.display = 'none';
+  effacerVideos();
+});
 
-function afficherVideos() {
-  const videos = [
+// ================================
+// 🎬 Gestion des vidéos (option : personnalisation par utilisateur)
+// ================================
+function afficherVideosForUser(username) {
+  // Exemple : si tu veux des vidéos spécifiques par utilisateur, personnalise ici.
+  const baseVideos = [
     { titre: "Sur la route - vlog #1", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     { titre: "Ma journée de chauffeur poids lourd", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" },
     { titre: "Conseils pour les longs trajets", lien: "https://www.youtube.com/embed/3JZ_D3ELwOQ" },
   ];
+
+  // Exemples simples de vidéos personnalisées (tu peux remplacer les listes)
+  const personnalisations = {
+    "Filou": [
+      { titre: "Filou : astuces camions", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ],
+    "Oxi": [
+      { titre: "Oxi : routes de nuit", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" }
+    ],
+    "Kyù": [
+      { titre: "Kyù : optimisation trajets", lien: "https://www.youtube.com/embed/3JZ_D3ELwOQ" }
+    ],
+    "SuperCAT71": [
+      { titre: "SuperCAT71 : mécanique rapide", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ],
+    "route87": baseVideos
+  };
+
+  const videos = personnalisations[username] || baseVideos;
 
   videosList.innerHTML = '';
   videos.forEach(video => {
@@ -104,7 +104,7 @@ function effacerVideos() {
 }
 
 // ================================
-// 🌙 Optionnel : mode sombre
+// 🌙 Mode sombre
 // ================================
 const darkModeBtn = document.createElement('button');
 darkModeBtn.textContent = '🌙 Mode sombre';
@@ -114,7 +114,17 @@ header.appendChild(darkModeBtn);
 let dark = false;
 darkModeBtn.addEventListener('click', () => {
   dark = !dark;
-  document.body.style.background = dark ? '#111' : '#f9f9f9';
-  document.body.style.color = dark ? '#f9f9f9' : '#111';
+  document.body.classList.toggle('dark', dark);
   darkModeBtn.textContent = dark ? '☀️ Mode clair' : '🌙 Mode sombre';
 });
+
+// ================================
+// 💬 Système de notification
+// ================================
+function showMessage(msg, type = 'info') {
+  const box = document.createElement('div');
+  box.textContent = msg;
+  box.className = `msg ${type}`;
+  document.body.appendChild(box);
+  setTimeout(() => box.remove(), 3000);
+}
