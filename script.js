@@ -1,16 +1,10 @@
-// ================================
-// 🚚 YouTube Routier87 — Connexion locale avec mémorisation
-// ================================
-
-// 🎛️ Sélecteurs du DOM
+// Connexion locale + mémorisation + recherche
 const loginBtn = document.getElementById("loginBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 const videosList = document.querySelector(".videos-list");
 const authDiv = document.getElementById("auth");
+const searchInput = document.getElementById("searchInput");
 
-// ================================
-// 👤 Comptes et mots de passe
-// ================================
 const comptes = {
   "route87": "r87Pass!23",
   "Oxi": "Oxi_2025",
@@ -21,14 +15,12 @@ const comptes = {
 
 let utilisateur = null;
 
-// ================================
-// 🔁 Vérifie si un utilisateur est déjà connecté
-// ================================
+// -----------------------------
+// Vérification mémoire locale
 window.addEventListener("DOMContentLoaded", () => {
   const savedUser = localStorage.getItem("utilisateur");
   if (savedUser) {
     utilisateur = JSON.parse(savedUser);
-    showMessage(`Bienvenue de retour ${utilisateur.nom} 🚛`, "info");
     loginBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
     afficherVideos(utilisateur.nom);
@@ -37,12 +29,10 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ================================
-// 🔓 Connexion via popup
-// ================================
+// -----------------------------
+// Connexion popup
 loginBtn.addEventListener("click", () => {
   if (utilisateur) return;
-
   const popup = document.createElement("div");
   popup.className = "popup-login";
   popup.innerHTML = `
@@ -59,41 +49,43 @@ loginBtn.addEventListener("click", () => {
   document.body.appendChild(popup);
 
   document.getElementById("fermerPopup").addEventListener("click", () => popup.remove());
-
   document.getElementById("validerLogin").addEventListener("click", () => {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
-
     if (comptes[username] && comptes[username] === password) {
       utilisateur = { nom: username };
-      localStorage.setItem("utilisateur", JSON.stringify(utilisateur)); // ✅ sauvegarde
+      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
       showMessage(`Bienvenue ${username} 🚛`, "success");
       popup.remove();
       loginBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
       afficherVideos(username);
-    } else {
-      showMessage("Identifiant ou mot de passe incorrect ❌", "error");
-    }
+    } else showMessage("Identifiant ou mot de passe incorrect ❌", "error");
   });
 });
 
-// ================================
-// 🚪 Déconnexion
-// ================================
+// -----------------------------
+// Déconnexion
 logoutBtn.addEventListener("click", () => {
   utilisateur = null;
-  localStorage.removeItem("utilisateur"); // ❌ supprime la sauvegarde
+  localStorage.removeItem("utilisateur");
   showMessage("Tu es déconnecté 👋", "info");
   loginBtn.style.display = "inline-block";
   logoutBtn.style.display = "none";
   effacerVideos();
 });
 
-// ================================
-// 🎬 Gestion des vidéos
-// ================================
-function afficherVideos(username) {
+// -----------------------------
+// Recherche dynamique
+searchInput.addEventListener("input", () => {
+  if (!utilisateur) return;
+  const query = searchInput.value.toLowerCase();
+  afficherVideos(utilisateur.nom, query);
+});
+
+// -----------------------------
+// Affichage vidéos
+function afficherVideos(username, filter = "") {
   const baseVideos = [
     { titre: "Sur la route - vlog #1", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
     { titre: "Ma journée de chauffeur poids lourd", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" },
@@ -108,8 +100,11 @@ function afficherVideos(username) {
     "route87": baseVideos
   };
 
-  const videos = personnalisations[username] || baseVideos;
+  let videos = personnalisations[username] || baseVideos;
+  if (filter.trim() !== "") videos = videos.filter(v => v.titre.toLowerCase().includes(filter));
+
   videosList.innerHTML = "<h2>Vidéos recommandées</h2>";
+  if (videos.length === 0) videosList.innerHTML += "<p style='text-align:center;'>Aucune vidéo trouvée 😕</p>";
 
   videos.forEach(video => {
     const card = document.createElement("div");
@@ -122,13 +117,14 @@ function afficherVideos(username) {
   });
 }
 
+// -----------------------------
+// Effacer vidéos
 function effacerVideos() {
   videosList.innerHTML = "<h2>Vidéos recommandées</h2><p style='text-align:center;'>Connecte-toi pour voir les vidéos 🚛</p>";
 }
 
-// ================================
-// 💬 Messages temporaires
-// ================================
+// -----------------------------
+// Notifications
 function showMessage(msg, type = "info") {
   const box = document.createElement("div");
   box.textContent = msg;
@@ -137,9 +133,8 @@ function showMessage(msg, type = "info") {
   setTimeout(() => box.remove(), 3000);
 }
 
-// ================================
-// 🌙 Mode sombre
-// ================================
+// -----------------------------
+// Mode sombre
 const darkModeBtn = document.createElement("button");
 darkModeBtn.textContent = "🌙 Mode sombre";
 darkModeBtn.style.marginLeft = "1rem";
@@ -149,5 +144,4 @@ let dark = false;
 darkModeBtn.addEventListener("click", () => {
   dark = !dark;
   document.body.classList.toggle("dark", dark);
-  darkModeBtn.textContent = dark ? "☀️ Mode clair" : "🌙 Mode sombre";
-});
+  darkModeBtn.textContent = dark
