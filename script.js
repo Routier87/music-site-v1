@@ -20,13 +20,13 @@ let utilisateur = null;
 // Musiques exclusives
 const musiquesExclusives = [
   { titre: "Exclu 1", lien: "https://www.youtube.com/embed/lIxlL6mr2Ho" },
-  { titre: "Exclu 2", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+  { titre: "Exclu 2", lien: "rien pous l'instant" }
 ];
 
 // Musiques FarmTor
 const musiquesFarmTor = [
-  { titre: "FarmTor 1", lien: "https://www.youtube.com/embed/lIxlL6mr2Ho" },
-  { titre: "FarmTor 2", lien: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+  { titre: "FarmTor 1", lien: "https://youtu.be/K4RA4wPdICA?si=dr7FhA3pppc2_6UK" },
+  { titre: "FarmTor 2", lien: "https://youtu.be/Ot_NwaSFMu4?si=0FAk5IYu0U7ggAFX" },
   { titre: "FarmTor 3", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" }
 ];
 
