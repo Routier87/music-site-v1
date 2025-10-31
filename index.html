@@ -8,9 +8,7 @@
 </head>
 <body>
   <!-- Fond Porsche -->
-  <div class="road-background">
-    <img src="https://i.imgur.com/3ZpTQ9R.png" alt="Porsche" class="porsche">
-  </div>
+  <div class="background-image"></div>
 
   <header>
     <h1>YouTube Routier87</h1>
@@ -25,41 +23,49 @@
   <main>
     <section id="welcomeSection" style="text-align:center; margin-top:20px;"></section>
 
-    <!-- Bloc Twitch / YouTube -->
-    <section class="social-links" style="text-align:center; margin:2rem 0;">
-      <h2>📺 Suivez-moi</h2>
-      <p>
-        <a href="https://www.twitch.tv/routier87" target="_blank">Ma chaîne Twitch : routier87</a><br>
-        <a href="https://www.youtube.com/@Routier87" target="_blank">Ma chaîne YouTube : Routier87</a>
-      </p>
+    <!-- Liens Twitch / YouTube de Routier87 -->
+    <section class="social-links">
+      <h2>📺 Suivez Routier87 en direct</h2>
+      <div class="social-buttons">
+        <a href="https://www.twitch.tv/routier87" class="btn twitch" target="_blank">Twitch : Routier87</a>
+        <a href="https://www.youtube.com/@Routier87" class="btn youtube" target="_blank">YouTube : Routier87</a>
+      </div>
+    </section>
+
+    <!-- Liens du Patron -->
+    <section class="social-links patron">
+      <h2>👑 Chaînes du Patron</h2>
+      <p style="color:#ffd700; font-weight:bold;">FarmSimulFR89</p>
+      <div class="social-buttons">
+        <a href="https://www.twitch.tv/farmsimulfr89" class="btn twitch" target="_blank">Twitch du Patron</a>
+        <a href="https://www.youtube.com/channel/UCGzoltoVDDixUV8P5pYxlyw" class="btn youtube" target="_blank">YouTube du Patron</a>
+      </div>
     </section>
 
     <!-- Barre de recherche -->
-    <section class="search-section" style="text-align:center; margin:1rem 0;">
-      <input type="text" id="searchInput" placeholder="Rechercher un titre..."
-             style="padding:0.5rem; width:60%; max-width:400px; border-radius:5px; border:none;">
+    <section class="search-section">
+      <input type="text" id="searchInput" placeholder="Rechercher un titre...">
     </section>
 
     <!-- Vidéo principale -->
-    <section class="video" style="text-align:center;">
+    <section class="video">
       <iframe width="560" height="315" 
               src="https://www.youtube.com/embed/t2wAE-yAA3I"
-              title="Vidéo YouTube Routier87" frameborder="0" allowfullscreen>
-      </iframe>
+              title="Vidéo YouTube Routier87" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <!-- Musiques exclusives -->
-    <section class="music-exclusive" style="text-align:center; margin-top:2rem;">
+    <section class="music-exclusive">
       <h2>🎵 Musiques Exclusives</h2>
     </section>
 
-    <!-- Mes musiques FarmTor -->
-    <section class="mes-musiques" style="text-align:center; margin-top:2rem;">
+    <!-- Musiques FarmTor -->
+    <section class="mes-musiques">
       <h2>🎶 Mes musiques FarmTor</h2>
       <div id="musiqueList"></div>
     </section>
 
-    <!-- Liste des vidéos recommandées -->
+    <!-- Liste des vidéos -->
     <section class="videos-list">
       <h2>Vidéos recommandées</h2>
       <p style="text-align:center;">Connecte-toi pour voir les vidéos 🚛</p>
