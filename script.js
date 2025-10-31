@@ -8,11 +8,11 @@ const searchInput = document.getElementById("searchInput");
 
 // Comptes initiaux (provisoire)
 const comptes = {
-  "route87": "12345",
+  "routier87": "878797",
   "Oxi": "OxiPass1!",
-  "Filou": "FilouPass2!",
-  "Kyù": "KyuPass3!",
-  "SuperCAT71": "SC71Pass4!"
+  "filoustitch08": "01081991",
+  "Kyù": "kyu3091",
+  "SuperCAT71": "Superc@t_71",
 };
 
 let utilisateur = null;
