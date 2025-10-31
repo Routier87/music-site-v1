@@ -1,37 +1,43 @@
+/* === STYLE GLOBAL === */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f9f9f9;
   color: #111;
+  background: #f9f9f9;
+  overflow-x: hidden;
 }
 
-/* Fond Porsche */
-.road-background {
+/* === FOND D'ÉCRAN (Porsche) === */
+.background-image {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 300px;
+  height: 100%;
+  background: url('1994acd5-ea3f-4a8f-a525-124df19f1f73.png') no-repeat center center fixed;
+  background-size: cover;
   z-index: -1;
-  overflow: hidden;
-}
-.road-background img.porsche {
-  width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+  filter: brightness(0.45);
 }
 
+/* === HEADER === */
 header {
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   color: #fff;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(5px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-h1 { margin:0; color:#ff3333; }
+
+h1 {
+  margin: 0;
+  color: #ff3333;
+  text-shadow: 0 0 8px #ff000088;
+}
 
 button {
   background: #ff0000;
@@ -40,50 +46,186 @@ button {
   padding: 0.6rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s;
 }
-button:hover { background: #cc0000; transform: scale(1.05); }
+button:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
 
-main { padding: 2rem; text-align: center; }
-.video iframe, .music-exclusive iframe {
+/* === CONTENU PRINCIPAL === */
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.video iframe,
+.music-exclusive iframe {
   border-radius: 10px;
-  border: 3px solid rgba(255,255,255,0.3);
-  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-.videos-list, .music-exclusive, .mes-musiques, .social-links {
-  background: rgba(0,0,0,0.6);
+/* === BLOCS CONTENUS === */
+.videos-list,
+.music-exclusive,
+.mes-musiques,
+.social-links {
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   padding: 1rem;
   margin-top: 2rem;
+  color: white;
+  backdrop-filter: blur(5px);
 }
+
 .video-card {
   display: inline-block;
   margin: 1rem;
   padding: 1rem;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   transition: 0.2s;
 }
-.video-card:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+.video-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
 
-/* Mode sombre */
-body.dark { background:#111; color:#f9f9f9; }
-body.dark .road-background { filter: brightness(0.3); }
-body.dark header { background: rgba(30,30,30,0.9); }
+/* === MODE SOMBRE === */
+body.dark {
+  background: #111;
+  color: #f9f9f9;
+}
+body.dark .background-image {
+  filter: brightness(0.3);
+}
+body.dark header {
+  background: rgba(30, 30, 30, 0.9);
+}
 
-/* Popup connexion/inscription */
+/* === POPUP CONNEXION / INSCRIPTION === */
 .popup-login {
   position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.7);
-  display:flex; justify-content:center; align-items:center;
-  z-index:1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
+
 .popup-content {
-  background:#fff; padding:2rem; border-radius:10px; text-align:center; min-width:300px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 300px;
 }
 .popup-content input {
-  display:block; width:90%; margin:0.5rem auto; padding:0.5rem;
+  display: block;
+  width: 90%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
 }
-.popup-buttons { margin-top:1rem; }
-.popup-buttons button { margin:0 0.5rem; }
+.popup-buttons {
+  margin-top: 1rem;
+}
+.popup-buttons button {
+  margin: 0 0.5rem;
+}
+
+/* === LIENS TWITCH / YOUTUBE === */
+.social-links {
+  text-align: center;
+  margin: 2rem 0;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  padding: 1.5rem;
+  color: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+.btn.twitch {
+  background-color: #9146ff;
+}
+
+.btn.youtube {
+  background-color: #ff0000;
+}
+
+/* === BLOC DU PATRON === */
+.social-links.patron {
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 20px #ffd700aa;
+  animation: glow 3s infinite alternate;
+}
+
+.social-links.patron h2 {
+  color: #ffd700;
+  text-shadow: 0 0 10px #ffd700cc;
+}
+
+/* Animation du glow doré */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 15px #ffd70088;
+  }
+  to {
+    box-shadow: 0 0 30px #ffea0088;
+  }
+}
+
+/* === BARRE DE RECHERCHE === */
+.search-section input {
+  padding: 0.5rem;
+  width: 60%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  iframe {
+    width: 100%;
+    height: auto;
+  }
+
+  .btn {
+    width: 80%;
+    text-align: center;
+  }
+}
