@@ -22,6 +22,7 @@ let utilisateur = null;
 const musiquesExclusives = [
   { titre: "Exclu 1", lien: "https://www.youtube.com/embed/lIxlL6mr2Ho" },
   { titre: "Exclu 2", lien: "https://youtu.be/g66VLJFm80w" }
+  { titre: "Exclu 3 Musique MR Wolf 1", lien: "https://youtu.be/-7vkps-2-SY" },
 ];
 
 // Musiques FarmTor
