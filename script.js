@@ -26,7 +26,7 @@ const musiquesExclusives = [
 
 // Musiques FarmTor
 const musiquesFarmTor = [
-  { titre: "FarmTor 1", lien: "https://youtu.be/K4RA4wPdICA?si=OgY1s_g7nyobdWD9" },
+  { titre: "Musique MR Wolf 1", lien: "https://youtu.be/-7vkps-2-SY" },
   { titre: "FarmTor 2", lien: "https://youtu.be/Ot_NwaSFMu4?si=eyThGAzV63v8m4dg" },
   { titre: "FarmTor 3", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" }
 ];
