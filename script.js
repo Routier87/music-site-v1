@@ -21,14 +21,14 @@ let utilisateur = null;
 // Musiques exclusives
 const musiquesExclusives = [
   { titre: "Exclu 1", lien: "https://www.youtube.com/embed/lIxlL6mr2Ho" },
-  { titre: "Exclu 2", lien: "https://youtu.be/g66VLJFm80w" }
-  { titre: "Exclu 3 Musique MR Wolf 1", lien: "https://youtu.be/-7vkps-2-SY" },
+  { titre: "Exclu 2", lien: "https://www.youtube.com/embed/g66VLJFm80w" },
+  { titre: "Exclu 3 Musique MR Wolf 1", lien: "https://www.youtube.com/embed/-7vkps-2-SY" },
 ];
 
 // Musiques FarmTor
 const musiquesFarmTor = [
-  { titre: "Musique MR Wolf 1", lien: "https://youtu.be/-7vkps-2-SY" },
-  { titre: "FarmTor 2", lien: "https://youtu.be/Ot_NwaSFMu4?si=eyThGAzV63v8m4dg" },
+  { titre: "Musique MR Wolf 1", lien: "https://www.youtube.com/embed/-7vkps-2-SY" },
+  { titre: "FarmTor 2", lien: "https://www.youtube.com/embed/Ot_NwaSFMu4" },
   { titre: "FarmTor 3", lien: "https://www.youtube.com/embed/TUVcZfQe-Kw" }
 ];
 
@@ -40,6 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
     loginBtn.style.display = "none";
     signupBtn.style.display = "none";
     logoutBtn.style.display = "inline-block";
+    afficherBienvenue();
     afficherVideos();
     afficherMusiques();
     afficherMesMusiques();
@@ -55,6 +56,7 @@ loginBtn.addEventListener("click", () => {
       loginBtn.style.display = "none";
       signupBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
+      afficherBienvenue();
       afficherVideos();
       afficherMusiques();
       afficherMesMusiques();
@@ -112,6 +114,7 @@ logoutBtn.addEventListener("click", () => {
   effacerVideos();
   document.querySelector(".music-exclusive").innerHTML = "<h2>🎵 Musiques Exclusives</h2>";
   document.getElementById("musiqueList").innerHTML = "";
+  afficherBienvenue();
 });
 
 // Mode sombre
@@ -119,6 +122,16 @@ darkModeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   darkModeBtn.textContent = document.body.classList.contains("dark") ? "☀️ Mode clair" : "🌙 Mode sombre";
 });
+
+// Message d’accueil
+function afficherBienvenue() {
+  const welcome = document.getElementById("welcomeSection");
+  if (utilisateur) {
+    welcome.textContent = `Bienvenue ${utilisateur.nom} 👋`;
+  } else {
+    welcome.textContent = "";
+  }
+}
 
 // Fonctions d’affichage
 function afficherVideos() {
